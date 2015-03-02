@@ -5,7 +5,10 @@
 # Copyright 2012-2014, Escape Studios
 #
 
-include_recipe 'mysql::client'
+mysql_client 'default' do
+  action :create
+end
+
 include_recipe 'chef-sugar'
 
 package 'holland-mysqldump' do
