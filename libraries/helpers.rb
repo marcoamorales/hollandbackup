@@ -2,7 +2,7 @@ module HollandBackupCookbook
   module Helpers
     include Chef::DSL::IncludeRecipe
 
-    def repo_name
+    def distro
       return new_resource.repo_name if new_resource.repo_name
       return 'RHEL_7' if node['platform'] == 'redhat' && node['platform_version'].to_i == 7
       return 'RedHat_RHEL-6' if node['platform'] == 'redhat' && node['platform_version'].to_i == 6
@@ -21,6 +21,16 @@ module HollandBackupCookbook
       return 'xUbuntu_13.04' if node['platform_family'] == 'debian' && node['platform_version'] == '13.04'
       return 'xUbuntu_13.10' if node['platform_family'] == 'debian' && node['platform_version'] == '13.10'
       return 'xUbuntu_14.04' if node['platform_family'] == 'debian' && node['platform_version'] == '14.04'
+    end
+
+    def repo_url
+      return new_resource.repo_url if new_resource.repo_url
+      return "http://download.opensuse.org/repositories/home:/holland-backup/#{distro}/"
+    end
+
+    def gpg_key_url
+      return new_resource.gpg_key_url if new_resource.gpg_key_url
+      return "http://download.opensuse.org/repositories/home:/holland-backup/#{distro}/Release.key"
     end
   end
 end

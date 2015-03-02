@@ -23,3 +23,8 @@ suites:
       - recipe[hollandbackup::main]
       - recipe[hollandbackup::backupsets]
     attributes:
+
+  - name: test
+    run_list:
+    - recipe[library-test]
+
