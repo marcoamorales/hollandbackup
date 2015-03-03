@@ -3,7 +3,7 @@ require_relative 'helpers'
 
 class Chef
   class Provider
-    class HollandBackupInstall < Chef::Provider::LWRPBase
+    class HollandbackupInstall < Chef::Provider::LWRPBase
       include HollandBackupCookbook::Helpers
       include Chef::DSL::IncludeRecipe
 
@@ -27,7 +27,7 @@ class Chef
 
           execute 'holland-add-gpg-key' do
             command "apt-key add #{Chef::Config[:file_cache_path]}/hollandkey"
-            notifies 'run', 'execute[holland-apt-get-update' 'immediately'
+            notifies 'run', 'execute[holland-apt-get-update]', 'immediately'
             not_if "apt-key list | grep #{distro}"
           end
 
@@ -40,12 +40,12 @@ class Chef
         end
 
         package 'holland' do
-          package_name new_resources.package_name if new_resources.package_name
-          version new_resources.package_version if new_resources.package_version
-          options new_resources.package_manager_flags if new_resources.package_manager_flags
+          package_name new_resource.package_name if new_resource.package_name
+          version new_resource.package_version if new_resource.package_version
+          options new_resource.package_manager_flags if new_resource.package_manager_flags
         end
 
-        new_resources.additional_packages.each do |package_name|
+        new_resource.additional_packages.each do |package_name|
           package 'additional holland packages' do
             package_name package_name
           end

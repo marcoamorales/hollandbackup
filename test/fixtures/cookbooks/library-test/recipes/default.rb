@@ -1,2 +1,2 @@
-hollandbackup_install do
+hollandbackup_install 'test' do
 end
