@@ -46,14 +46,29 @@ class Chef
         end
 
         new_resource.additional_packages.each do |package_name|
-          package 'additional holland packages' do
+          package "additional holland package #{package_name}" do
             package_name package_name
           end
         end
       end
 
       action :delete do
-        # Delete things
+        # TODO: Delete the gpg key
+        package 'holland' do
+          package_name new_resource.package_name if new_resource.package_name
+          action :remove
+        end
+
+        new_resource.additional_packages.each do |package_name|
+          package "additional holland package #{package_name}" do
+            package_name package_name
+            action :remove
+          end
+        end
+
+        file '/etc/apt/sources.list.d/holland.list' do
+          action :delete
+        end
       end
     end
   end
