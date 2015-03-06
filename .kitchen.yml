@@ -24,7 +24,12 @@ suites:
       - recipe[hollandbackup::backupsets]
     attributes:
 
-  - name: test
+  # Test the installation of holland leveraging the library
+  - name: library-install
     run_list:
     - recipe[library-test]
 
+  # Test the installation and then removal of holland leveraging the library
+  - name: library-install-uninstall
+    run_list:
+    - recipe[library-test::install_uninstall]
