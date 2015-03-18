@@ -31,6 +31,7 @@ suites:
   - name: library-install
     run_list:
     - recipe[library-test::install]
+    - recipe[library-test::mysqldump]
     - recipe[library-test::main]
 
   # Test the installation and then removal of holland leveraging the library
