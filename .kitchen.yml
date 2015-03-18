@@ -30,7 +30,8 @@ suites:
   # Test the installation of holland leveraging the library
   - name: library-install
     run_list:
-    - recipe[library-test]
+    - recipe[library-test::install]
+    - recipe[library-test::main]
 
   # Test the installation and then removal of holland leveraging the library
   - name: library-install-uninstall
