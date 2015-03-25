@@ -18,7 +18,7 @@ describe file('/etc/holland/holland.conf') do
   it { should be_owned_by 'root' }
   it { should be_grouped_into 'root' }
   it { should be_mode 644 }
-  its(:content) { should match /backup_directory = \/var\/spool\/holland/ }
+  its(:content) { should match %r{backup_directory = \/var\/spool\/holland} }
 end
 
 describe file('/etc/holland/providers/mysqldump.conf') do
@@ -26,7 +26,7 @@ describe file('/etc/holland/providers/mysqldump.conf') do
   it { should be_owned_by 'root' }
   it { should be_grouped_into 'root' }
   it { should be_mode 644 }
-  its(:content) { should match /\[mysqldump\]/ }
+  its(:content) { should match(/\[mysqldump\]/) }
 end
 
 describe file('/etc/holland/backupsets/default.conf') do
@@ -34,10 +34,10 @@ describe file('/etc/holland/backupsets/default.conf') do
   it { should be_owned_by 'root' }
   it { should be_grouped_into 'root' }
   it { should be_mode 644 }
-  its(:content) { should match /\[mysqldump\]/ }
+  its(:content) { should match(/\[mysqldump\]/) }
 end
 
 describe command('holland bk') do
   its(:exit_status) { should eq 0 }
-  its(:stdout) { should match /Backup completed in/ }
+  its(:stdout) { should match(/Backup completed in/) }
 end

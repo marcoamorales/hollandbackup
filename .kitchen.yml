@@ -19,23 +19,15 @@ platforms:
     - recipe[yum]
 
 suites:
+  # Test the installation of holland leveraging the library
   - name: default
     run_list:
-      - recipe[hollandbackup::default]
-      - recipe[hollandbackup::mysqldump]
-      - recipe[hollandbackup::main]
-      - recipe[hollandbackup::backupsets]
-    attributes:
-
-  # Test the installation of holland leveraging the library
-  - name: library-install
-    run_list:
-    - recipe[library-test::install]
-    - recipe[library-test::main]
-    - recipe[library-test::mysqldump]
-    - recipe[library-test::backupsets]
+    - recipe[test-cookbook::install]
+    - recipe[test-cookbook::main]
+    - recipe[test-cookbook::mysqldump]
+    - recipe[test-cookbook::backupsets]
 
   # Test the installation and then removal of holland leveraging the library
-  - name: library-install-uninstall
+  - name: uninstall
     run_list:
-    - recipe[library-test::install_uninstall]
+    - recipe[test-cookbook::install_uninstall]
