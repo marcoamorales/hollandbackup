@@ -8,12 +8,12 @@ class Chef
       default_action :configure
 
       # template
-      attribute :cookbook, kind_of: String, default: 'hollandbackup'
-      attribute :template_path, kind_of: String, default: '/etc/holland/providers/mysqldump.conf'
-      attribute :source, kind_of: String, default: 'mysqldump.conf.erb'
-      attribute :owner, kind_of: String, default: 'root'
-      attribute :group, kind_of: String, default: 'root'
-      attribute :mode, kind_of: String, default: '0644'
+      attribute :cookbook, :kind_of => String, :default => 'hollandbackup'
+      attribute :template_path, :kind_of => String, :default => '/etc/holland/providers/mysqldump.conf'
+      attribute :source, :kind_of => String, :default => 'mysqldump.conf.erb'
+      attribute :owner, :kind_of => String, :default => 'root'
+      attribute :group, :kind_of => String, :default => 'root'
+      attribute :mode, :kind_of => String, :default => '0644'
 
       # [mysqldump]
       attribute :mysql_binpath, :kind_of => String, :default => nil

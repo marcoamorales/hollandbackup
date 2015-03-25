@@ -2,4 +2,4 @@ source 'https://supermarket.getchef.com'
 
 metadata
 
-cookbook 'library-test', path: 'test/fixtures/cookbooks/library-test'
+cookbook 'test-cookbook', :path => 'test/fixtures/cookbooks/test-cookbook'

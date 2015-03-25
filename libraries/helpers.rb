@@ -2,6 +2,7 @@ module HollandBackupCookbook
   module Helpers
     include Chef::DSL::IncludeRecipe
 
+    # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     def distro
       return new_resource.repo_name if new_resource.repo_name
       return 'RHEL_7' if node['platform'] == 'redhat' && node['platform_version'].to_i == 7
@@ -25,12 +26,12 @@ module HollandBackupCookbook
 
     def repo_url
       return new_resource.repo_url if new_resource.repo_url
-      return "http://download.opensuse.org/repositories/home:/holland-backup/#{distro}/"
+      "http://download.opensuse.org/repositories/home:/holland-backup/#{distro}/"
     end
 
     def gpg_key_url
       return new_resource.gpg_key_url if new_resource.gpg_key_url
-      return "http://download.opensuse.org/repositories/home:/holland-backup/#{distro}/Release.key"
+      "http://download.opensuse.org/repositories/home:/holland-backup/#{distro}/Release.key"
     end
   end
 end
