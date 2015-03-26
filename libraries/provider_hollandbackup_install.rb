@@ -5,7 +5,6 @@ class Chef
   class Provider
     class HollandbackupInstall < Chef::Provider::LWRPBase
       include HollandBackupCookbook::Helpers
-      include Chef::DSL::IncludeRecipe
 
       use_inline_resources if defined?(use_inline_resources)
 

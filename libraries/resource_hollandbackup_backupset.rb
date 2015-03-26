@@ -10,7 +10,6 @@ class Chef
       # template
       attribute :name, :kind_of => String, :name_attribute => true
       attribute :cookbook, :kind_of => String, :default => 'hollandbackup'
-      attribute :path, :kind_of => String, :default => "/etc/holland/backupsets/#{:name}.conf"
       attribute :source, :kind_of => String, :default => 'backupset_full.conf.erb'
       attribute :owner, :kind_of => String, :default => 'root'
       attribute :group, :kind_of => String, :default => 'root'
@@ -18,7 +17,7 @@ class Chef
 
       # backupset
       attribute :name, :kind_of => String, :name_attribute => true
-      attribute :plugin, :kind_of => String
+      attribute :plugin, :kind_of => String, :default => 'mysqldump'
       attribute :backups_to_keep, :kind_of => Integer, :default => 1
       attribute :estimated_size_factor, :kind_of => String, :default => '1.0'
       attribute :auto_purge_failures, :kind_of => String, :default => 'yes'
@@ -63,6 +62,15 @@ class Chef
 
       # backupset-specific plugin configuration
       attribute :mysqldump, :kind_of => Hash, :default => {}
+
+      def path( arg=nil )
+        if arg.nil? and @path.nil?
+          "/etc/holland/backupsets/#{name}.conf"
+        else
+          set_or_return( :path, arg, :kind_of => String)
+        end
+      end
+
     end
   end
 end
