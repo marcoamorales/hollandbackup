@@ -3,7 +3,6 @@ require 'chef/provider/lwrp_base'
 class Chef
   class Provider
     class HollandbackupBackupset < Chef::Provider::LWRPBase
-
       use_inline_resources if defined?(use_inline_resources)
 
       action :configure do

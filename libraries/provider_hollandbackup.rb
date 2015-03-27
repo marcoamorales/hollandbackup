@@ -3,12 +3,12 @@ require_relative 'helpers'
 
 class Chef
   class Provider
-    class HollandbackupInstall < Chef::Provider::LWRPBase
+    class Hollandbackup < Chef::Provider::LWRPBase
       include HollandBackupCookbook::Helpers
 
       use_inline_resources if defined?(use_inline_resources)
 
-      action :create do
+      action :install do
         case node['platform_family']
         when 'debian'
           file '/etc/apt/sources.list.d/holland.list' do
@@ -51,8 +51,7 @@ class Chef
         end
       end
 
-      action :delete do
-        # TODO: Delete the gpg key
+      action :uninstall do
         package 'holland' do
           package_name new_resource.package_name if new_resource.package_name
           action :remove
@@ -65,8 +64,24 @@ class Chef
           end
         end
 
-        file '/etc/apt/sources.list.d/holland.list' do
-          action :delete
+        if node['platform_family'] == 'debian'
+          file '/etc/apt/sources.list.d/holland.list' do
+            action :delete
+          end
+        end
+      end
+
+      action :configure do
+        template 'holland.conf' do
+          cookbook new_resource.cookbook
+          path new_resource.template_path
+          source new_resource.source
+          owner new_resource.owner
+          group new_resource.group
+          mode new_resource.mode
+          variables(
+            :resource => new_resource
+          )
         end
       end
     end

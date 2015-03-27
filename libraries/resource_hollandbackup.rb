@@ -2,12 +2,21 @@ require 'chef/resource/lwrp_base'
 
 class Chef
   class Resource
-    class HollandbackupMain < Chef::Resource::LWRPBase
-      self.resource_name = :hollandbackup_main
-      actions :configure
-      default_action :configure
+    class Hollandbackup < Chef::Resource::LWRPBase
+      self.resource_name = :hollandbackup
+      actions :configure, :install, :uninstall
+      default_action :install
 
-      # template
+      # install attributes
+      attribute :repo_name, :kind_of => String
+      attribute :package_version, :kind_of => String
+      attribute :package_name, :kind_of => String
+      attribute :repo_url, :kind_of => String
+      attribute :gpg_key_url, :kind_of => String
+      attribute :additional_packages, :kind_of => Array, :default => []
+      attribute :package_manager_flags, :kind_of => String
+
+      # holland.conf template
       attribute :cookbook, :kind_of => String, :default => 'hollandbackup'
       attribute :template_path, :kind_of => String, :default => '/etc/holland/holland.conf'
       attribute :source, :kind_of => String, :default => 'holland.conf.erb'

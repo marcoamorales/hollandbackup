@@ -4,7 +4,6 @@ require_relative 'helpers'
 class Chef
   class Provider
     class HollandbackupMysqldump < Chef::Provider::LWRPBase
-
       use_inline_resources if defined?(use_inline_resources)
 
       action :configure do

@@ -1,8 +1,8 @@
-hollandbackup_install 'test' do
-  action :create
+hollandbackup 'test' do
+  action :install
   additional_packages ['holland-mysqldump']
 end
 
-hollandbackup_install 'test' do
-  action :delete
+hollandbackup 'test' do
+  action :uninstall
 end

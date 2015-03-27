@@ -22,8 +22,7 @@ suites:
   # Test the installation of holland leveraging the library
   - name: default
     run_list:
-    - recipe[test-cookbook::install]
-    - recipe[test-cookbook::main]
+    - recipe[test-cookbook::default]
     - recipe[test-cookbook::mysqldump]
     - recipe[test-cookbook::backupsets]
 
